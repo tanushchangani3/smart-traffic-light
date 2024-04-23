@@ -1,0 +1,124 @@
+//RFID
+<div id="data3" style="border: 1px solid black; padding: 10px; width: 300px; font-size: 20px; font-weight: bold; color: black;"></div>
+<script>
+function fetchData() {
+    fetch('https://api.thingspeak.com/channels/2335029/fields/3/last.json?api_key=9JC875D9SUZKRVFF')
+    .then(response => response.json())
+    .then(data3 => {
+        // Check if the 'field3' property exists in the data
+        if (data3 && 'field3' in data3) {
+            // Display the data on your website
+            document.getElementById('data3').innerText = 'Authorization: ' + data3.field3;
+        } else {
+            document.getElementById('data3').innerText = 'Authorization: ??';
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+ 
+// Call fetchData immediately, then every 5 seconds
+fetchData();
+setInterval(fetchData, 1000);
+</script>
+//Overspeeding
+<div id="data3" style="border: 1px solid black; padding: 10px; width: 300px; font-size: 20px; font-weight: bold; color: black;"></div>
+<script>
+function fetchData() {
+    fetch('https://api.thingspeak.com/channels/2335029/fields/4/last.json?api_key=9JC875D9SUZKRVFF')
+    .then(response => response.json())
+    .then(data => {
+        // Check if the 'field4' property exists in the data
+        if (data && 'field4' in data) {
+            // Set a speed limit
+            var speedLimit = 70;
+ 
+            // Check if the car's speed exceeds the speed limit
+            if (data.field4 > speedLimit) {
+                alert('Overspeeding detected!');
+            }
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+ 
+// Call fetchData immediately, then every 5 seconds
+fetchData();
+setInterval(fetchData, 5000);
+</script>
+//Temperature
+<div id="data1" style="border: 1px solid black; padding: 10px; width: 300px; font-size: 20px; font-weight: bold; color: black;"></div>
+ 
+<script>
+function fetchData() {
+    fetch('https://api.thingspeak.com/channels/2335029/fields/2/last.json?api_key=9JC875D9SUZKRVFF')
+    .then(response => response.json())
+    .then(data1 => {
+        // Check if the 'field2' property exists in the data
+        if (data1 && 'field2' in data1) {
+            // Display the data on your website
+            document.getElementById('data1').innerText = 'Temperature of the Room: ' + data1.field2;
+        } else {
+            document.getElementById('data1').innerText = 'Humidity of the Room: ??';
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+ 
+// Call fetchData immediately, then every 5 seconds
+fetchData();
+setInterval(fetchData, 1000);
+</script>
+//Voltage
+<div id="data4" style="border: 1px solid black; padding: 10px; width: 300px; font-size: 20px; font-weight: bold; color: black;"></div>
+ 
+<script>
+function fetchData() {
+    fetch('https://api.thingspeak.com/channels/2335029/fields/5/last.json?api_key=9JC875D9SUZKRVFF')
+    .then(response => response.json())
+    .then(data4 => {
+        // Check if the 'field5' property exists in the data
+        if (data4 && 'field5' in data4) {
+            // Display the data on your website
+            document.getElementById('data4').innerText = 'Voltage: 0.000' ;
+        } else {
+            document.getElementById('data4').innerText = 'Humidity of the Room: ??';
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+ 
+// Call fetchData immediately, then every 5 seconds
+fetchData();
+setInterval(fetchData, 1000);
+</script>
+//Signal Violation Detection
+<div id="data4" style="border: 1px solid black; padding: 10px; width: 300px; font-size: 20px; font-weight: bold; color: black;"></div>
+<script>
+function fetchData() {
+    fetch('https://api.thingspeak.com/channels/2335029/fields/4,5/last.json?api_key=9JC875D9SUZKRVFF')
+    .then(response => response.json())
+    .then(data => {
+        // Check if the 'field4' and 'field5' properties exist in the data
+        if (data && 'field4' in data && 'field5' in data) {
+            // Check if the signal is red and the car is moving
+            if (data.field5 === 'red' && data.field4 > 0) {
+                alert('Red signal violation detected!');
+            }
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+ 
+// Call fetchData immediately, then every 5 seconds
+fetchData();
+setInterval(fetchData, 5000);
+</script>
+Graphical data codes
+//Temperature
+<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2335029/charts/2?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+//RFID
+<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2335029/charts/3?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=20&type=line&yaxismax=1&yaxismin=-1"></iframe>
+//Light Sensor
+<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2335029/charts/6?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+//Voltage
+<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2335029/charts/5?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
